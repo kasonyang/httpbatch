@@ -13,7 +13,7 @@ import groovy.lang.Script;
 abstract class HttpBatchScript extends Script {
 	
 	private http = new HttpRequest();
-	HttpResponseWrapper $$
+	HttpResponse $$
 	
 	Closure beforeGo,beforePost,afterGo,afterPost
 	
@@ -47,41 +47,41 @@ abstract class HttpBatchScript extends Script {
 	def enter(String path){
 		this.path = trimPath(path)
 	}
-	HttpResponseWrapper go(String uri,Map params,Closure callback){
+	HttpResponse go(String uri,Map params,Closure callback){
 		def httpGet = http.createGet(getUri(uri),params)
 		this.beforeGo?.call(httpGet)
 		def response = http.execute(httpGet)
-		this.$$ = new HttpResponseWrapper(response)
+		this.$$ = response
 		if(callback) callback.call()
 		this.afterGo?.call(response)
 		return this.$$
 	}
-	HttpResponseWrapper  go(String uri,Closure callback){
+	HttpResponse  go(String uri,Closure callback){
 		return go(uri,[:],callback)
 	}
-	HttpResponseWrapper  go(String uri,Map params){
+	HttpResponse  go(String uri,Map params){
 		return go(uri,params,null)
 	}
-	HttpResponseWrapper  go(String uri){
+	HttpResponse  go(String uri){
 		return this.go(uri,null)
 	}
 	
-	HttpResponseWrapper  post(String uri,Map params,Closure callback){
+	HttpResponse  post(String uri,Map params,Closure callback){
 		def httpPost = http.createPost(getUri(uri),params)
 		this.beforePost?.call(httpPost)
 		def response = http.execute(httpPost)
-		this.$$ = new HttpResponseWrapper(response)
+		this.$$ = response
 		if(callback) callback.call()
 		this.afterPost?.call(response)
 		return this.$$
 	}
-	HttpResponseWrapper  post(String uri,Closure callback){
+	HttpResponse  post(String uri,Closure callback){
 		return post(uri,[:],callback)
 	}
-	HttpResponseWrapper  post(String uri,Map params){
+	HttpResponse  post(String uri,Map params){
 		return post(uri,params,null)
 	}
-	HttpResponseWrapper  post(String uri){
+	HttpResponse  post(String uri){
 		return this.post(uri,null)
 	}
 	
