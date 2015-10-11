@@ -24,3 +24,37 @@ println text //output the response
 ```bash
 $ httpbatch example.hb
 ```
+
+# Examples
+
+1. Post form
+```
+post YOUR_URL ,[user:'test',password:'test'],{
+    def statusCode = $$.statusCode
+    def text = $$.text //get the text
+    testEquals 200,statusCode
+}
+```
+1. RESTful test
+```
+post YOUR_URL,[paramName:'paramValue'],{
+    def json = $$.json//get the result as json
+    testEquals "Hello Word!",json.message
+}
+```
+1. Set request header
+```
+beforeGo{ req ->
+    req.addHeader("Accept","application/json")
+}
+go YOUR_URL,{
+    //do something
+}
+```
+
+# Pre-defined variables and methods
+
+1. variables
+    1. `$$` the latest response,an instance of `org.apache.http.client.methods.CloseableHttpResponse`
+1. methods
+    
