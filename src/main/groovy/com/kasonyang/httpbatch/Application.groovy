@@ -49,6 +49,18 @@ usage : httpbatch file #execute a file
 		*/
 	}
 	
+	private static String getExceptionStack(Exception ex,String clsName){
+		String msg = ""
+		for(stack in ex.stackTrace){
+			if(stack.className == clsName){
+				def fileName = stack.fileName
+				def lineNumber = stack.lineNumber.toString()
+				msg += ("\tFile:${fileName}(${lineNumber})")
+			}
+		}
+		msg
+	}
+	
 	private static runScript(def it){
 		def config = new CompilerConfiguration()
 		config.scriptBaseClass = 'com.kasonyang.httpbatch.HttpBatchScript'
@@ -62,16 +74,14 @@ usage : httpbatch file #execute a file
 			//System.out.println(stateReturn)
 		}catch(TestException ex){
 			println "test fail:"
-			for(stack in ex.stackTrace){
-				if(stack.className == scriptClass){
-					def fileName = stack.fileName
-					def lineNumber = stack.lineNumber.toString()
-					println("\tFile:${fileName}(${lineNumber})")
-				}
-			}
+			println getExceptionStack(ex,scriptClass)
 			println "\texcepted:${ex.excepted}\n\tactual:${ex.actual}"
-		}catch(Exception ex){	
-			ex.printStackTrace()
+		}catch(Exception ex){
+			println ex.message
+			println getExceptionStack(ex,scriptClass)
+		}catch(RuntimeException ex){
+			println ex.message
+			println getExceptionStack(ex,scriptClass)
 		}
 	}
 }
