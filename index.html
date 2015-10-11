@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Httpbatch by kasonyang</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Httpbatch</h1>
+        <h2>A script engine for http request</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/kasonyang/httpbatch/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/kasonyang/httpbatch/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/kasonyang/httpbatch" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="whats-it" class="anchor" href="#whats-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's it？</h1>
+
+<p>HttpBatch is a script engine for http request,which is used for automated testing,crawler and so on.</p>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h1>
+
+<ul>
+<li>Base on groovy,flexible</li>
+<li>Convenient and efficient</li>
+<li>Needlessly to compile</li>
+</ul>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<ol>
+<li>
+<p>Installation</p>
+
+<p>Download the latest package(<a href="https://github.com/kasonyang/httpbatch/releases">https://github.com/kasonyang/httpbatch/releases</a>)
+unzip, then add the path <code>httpbatch/bin</code> to system environment <code>PATH</code></p>
+</li>
+<li>
+<p>Run</p>
+
+<ol>
+<li>Create a new file with the name "example.hb"</li>
+</ol>
+</li>
+</ol>
+
+<div class="highlight highlight-source-groovy"><pre>go <span class="pl-s"><span class="pl-pds">"</span>http://www.baidu.com<span class="pl-pds">"</span></span>
+testEquals <span class="pl-c1">200</span>,$$<span class="pl-k">.</span>statusCode<span class="pl-c">//Is the status code 200?</span>
+<span class="pl-k">def</span> text <span class="pl-k">=</span> $$<span class="pl-k">.</span>text <span class="pl-c">//get the response as text</span>
+<span class="pl-c1">println</span> text <span class="pl-c">//output the response</span></pre></div>
+
+<ol>
+<li>Execute the script file</li>
+</ol>
+
+<div class="highlight highlight-source-shell"><pre>$ httpbatch example.hb</pre></div>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
