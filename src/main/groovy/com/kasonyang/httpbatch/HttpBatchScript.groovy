@@ -36,6 +36,11 @@ abstract class HttpBatchScript extends Script {
 		this.base = ''
 	}
 	
+	/**
+	 * set the base path of request
+	 * @param path the base path
+	 * @return
+	 */
 	def base(String path){
 		this.base = trimPath(path)
 	}
@@ -44,9 +49,22 @@ abstract class HttpBatchScript extends Script {
 		this.path = ''
 	}
 	
+	/**
+	 * enter a directory in base
+	 * @param path
+	 * @return
+	 */
 	def enter(String path){
 		this.path = trimPath(path)
 	}
+	
+	/**
+	 * submit a get request
+	 * @param uri the request uri
+	 * @param params the query params
+	 * @param callback call after request
+	 * @return
+	 */
 	HttpResponse go(String uri,Map params,Closure callback){
 		def httpGet = http.createGet(getUri(uri),params)
 		this.beforeGo?.call(httpGet)
@@ -66,6 +84,13 @@ abstract class HttpBatchScript extends Script {
 		return this.go(uri,null)
 	}
 	
+	/**
+	 * submit a post request
+	 * @param uri the request uri
+	 * @param params the post params
+	 * @param callback call after request
+	 * @return
+	 */
 	HttpResponse  post(String uri,Map params,Closure callback){
 		def httpPost = http.createPost(getUri(uri),params)
 		this.beforePost?.call(httpPost)
@@ -85,31 +110,59 @@ abstract class HttpBatchScript extends Script {
 		return this.post(uri,null)
 	}
 	
+	/**
+	 * set the beforeGo callback,which whill be call before every get request 
+	 * @param callback
+	 */
 	void beforeGo(Closure callback){
 		this.beforeGo = callback
 	}
 	
+	/**
+	 * set the beforePost callback,which whill be call before every post request 
+	 * @param callback
+	 */
 	void beforePost(Closure callback){
 		this.beforePost = callback
 	}
 	
+	/**
+	 * set the callback,which whill be call when test fail 
+	 * @param cb
+	 */
 	void testFail(Closure cb){
 		this.testFail = cb
 	}
 	
+	/**
+	 * set the callback,which whill be call after every get request
+	 * @param callback
+	 */
 	void afterGo(Closure callback){
 		this.afterGo = callback
 	}
 	
+	/**
+	 * set the callback,which whill be call after every post request
+	 * @param callback
+	 */
 	void afterPost(Closure callback){
 		this.afterPost = callback
 	}
 
-	
+	/**
+	 * test whether it is true
+	 * @param value
+	 */
 	void testTrue(Object value){
 		testEquals(true,value)
 	}
 	
+	/**
+	 * test whether actual equals the excepted
+	 * @param excepted
+	 * @param actual
+	 */
 	void testEquals(Object excepted,Object actual){
 		if(excepted != actual){
 			def ex = new TestException(excepted,actual)
@@ -121,6 +174,10 @@ abstract class HttpBatchScript extends Script {
 		}
 	}
 	
+	/**
+	 * test whether it is null
+	 * @param value
+	 */
 	void testNull(Object value){
 		testEquals(null,value)
 	}
