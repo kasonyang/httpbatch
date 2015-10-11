@@ -29,7 +29,7 @@ abstract class HttpBatchScript extends Script {
 	}
 	
 	private def getUri(uri){
-		this.base + '/' + this.path + '/' + trimPath(uri,true,false)
+		base + (base?'/':'') + path + (path?'/':'') + trimPath(uri,true,false)
 	}
 	
 	def base(){
