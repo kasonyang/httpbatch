@@ -16,6 +16,8 @@ class HttpResponse {
 	int statusCode
 	String text
 	
+	private String json
+	
 	public HttpResponse(CloseableHttpResponse response) {
 		this.response = response
 		this.statusCode = response.getStatusLine().getStatusCode()
