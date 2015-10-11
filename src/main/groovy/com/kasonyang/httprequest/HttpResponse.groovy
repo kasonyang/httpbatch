@@ -16,7 +16,7 @@ class HttpResponse {
 	int statusCode
 	String text
 	
-	private String json
+	private def json
 	
 	public HttpResponse(CloseableHttpResponse response) {
 		this.response = response
