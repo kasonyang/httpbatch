@@ -27,7 +27,7 @@ $ httpbatch example.hb
 
 # Examples
 
-1. Post form
+### Post form
 ```
 post YOUR_URL ,[user:'test',password:'test'],{
     def statusCode = $$.statusCode
@@ -35,14 +35,14 @@ post YOUR_URL ,[user:'test',password:'test'],{
     testEquals 200,statusCode
 }
 ```
-1. RESTful test
+### RESTful test
 ```
 post YOUR_URL,[paramName:'paramValue'],{
     def json = $$.json//get the result as json
     testEquals "Hello Word!",json.message
 }
 ```
-1. Set request header
+### Set request header
 ```
 beforeGo{ req ->
     req.addHeader("Accept","application/json")
@@ -55,6 +55,6 @@ go YOUR_URL,{
 # Pre-defined variables and methods
 
 1. variables
-    1. `$$` the latest response,an instance of `org.apache.http.client.methods.CloseableHttpResponse`
+    1. `$$` the latest response.You can use it as an instance of [`org.apache.http.client.methods.CloseableHttpResponse`](http://hc.apache.org/httpcomponents-client-4.3.x/httpclient/apidocs/org/apache/http/client/methods/CloseableHttpResponse.html)
 1. methods
-    
+    visit the [api](http://www.kasonyang.com/httpbatch/api/com/kasonyang/httpbatch/HttpBatchScript.html)
