@@ -4,7 +4,7 @@ HttpBatch is a script engine for http request,which is used for automated testin
 # Features
 * Base on groovy,flexible
 * Convenient and efficient
-* Needlessly to compile
+* Needless to compile
 
 # Usage
 1. Installation
@@ -16,7 +16,7 @@ HttpBatch is a script engine for http request,which is used for automated testin
  1. Create a new file with the name "example.hb"
 ```groovy
 go "http://www.baidu.com"
-testEquals 200,$$.statusCode//Is the status code 200?
+testEquals 200,$$.statusCode//whether the status code  is 200?
 def text = $$.text //get the response as text
 println text //output the response
 ```
@@ -29,7 +29,7 @@ $ httpbatch example.hb
 
 ### Post form
 ```
-post YOUR_URL ,[user:'test',password:'test'],{
+post "YOUR_URL" ,[user:'test',password:'test'],{
     def statusCode = $$.statusCode
     def text = $$.text //get the text
     testEquals 200,statusCode
@@ -37,7 +37,7 @@ post YOUR_URL ,[user:'test',password:'test'],{
 ```
 ### RESTful test
 ```
-post YOUR_URL,[paramName:'paramValue'],{
+post "YOUR_URL",[paramName:'paramValue'],{
     def json = $$.json//get the result as json
     testEquals "Hello Word!",json.message
 }
@@ -47,7 +47,7 @@ post YOUR_URL,[paramName:'paramValue'],{
 beforeGo{ req ->
     req.addHeader("Accept","application/json")
 }
-go YOUR_URL,{
+go "YOUR_URL",{
     //do something
 }
 ```
